@@ -18,6 +18,11 @@ pipeline {
                 echo 'Running regresion tests'
                 sh 'bundle exec cucumber -p ci'
             }
+            post {
+                always {
+                    cucumber failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: '**/*.json', jsonReportDirectory: 'logs', pendingStepsNumber: -1, skippedStepsNUmber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
+                }
+            }
         }
         stage('UAT') {
             steps {
